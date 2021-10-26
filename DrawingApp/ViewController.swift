@@ -10,9 +10,18 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     
+    @IBOutlet weak var brushSize: UILabel!
     var swiped : Bool = false
     var lastPoint = CGPoint.zero
     
+    var red: CGFloat = 0.0
+    var green : CGFloat = 0.0
+    var blue: CGFloat = 0.0
+    
+    var brushWidth : CGFloat  = 5.0
+    
+    @IBOutlet weak var minusBtn: UIButton!
+    @IBOutlet weak var plusBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,8 +59,9 @@ class ViewController: UIViewController {
         context?.move(to: CGPoint(x: fromPoint.x, y: fromPoint.y))
         context?.addLine(to: CGPoint(x: fromPoint.x, y: fromPoint.y) )
         context?.setLineCap(CGLineCap.round)
-        context?.setLineWidth(5.0)
-        context?.setStrokeColor(red:0, green:0, blue:0, alpha:1)
+        
+        context?.setLineWidth(brushWidth)
+        context?.setStrokeColor(red:red, green:green, blue:blue, alpha:1)
         context?.setBlendMode(CGBlendMode.normal)
         context?.strokePath()
         imageView.image = UIGraphicsGetImageFromCurrentImageContext()
@@ -59,5 +69,64 @@ class ViewController: UIViewController {
         
     }
 
+    @IBAction func red(_ sender: Any) {
+        (red, green,blue) = (255,0,0)
+        
+    }
+    
+    @IBAction func green(_ sender: Any) {
+        (red, green,blue) = (0,255,0)
+
+    }
+    @IBAction func blue(_ sender: Any) {
+        (red, green,blue) = (0,0,255)
+
+    }
+    
+    @IBAction func black(_ sender: Any) {
+        (red, green,blue) = (0,0,0)
+
+    }
+    
+    @IBAction func eraser(_ sender: Any) {
+        (red, green,blue) = (255,255,255)
+
+    }
+    @IBAction func decrement(_ sender: Any) {
+        
+        brushWidth -= 1
+        self.brushSizeFn()
+    }
+    
+    
+    @IBAction func incremment(_ sender: Any) {
+        
+        brushWidth += 1
+        self.brushSizeFn()
+
+    }
+    
+    func brushSizeFn(){
+        
+        brushSize.text = String(format: "%.0f", brushWidth)
+        if brushWidth == 100 {
+            plusBtn.isEnabled = false
+            plusBtn.alpha = 0.0
+        }
+        else if brushWidth == 1 {
+            minusBtn.isEnabled = false
+            minusBtn.alpha = 0.0
+            
+        }else{
+            plusBtn.isEnabled = true
+            plusBtn.alpha = 1.0
+            minusBtn.isEnabled = true
+            minusBtn.alpha = 1.0
+        }
+    }
+    @IBAction func reset(_ sender: Any) {
+        
+        imageView.image = nil
+    }
 }
 

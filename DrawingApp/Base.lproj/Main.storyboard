@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,12 +13,95 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="DrawingApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dcl-JY-7i6">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="44" width="428" height="882"/>
                             </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="0Df-tk-PI4">
+                                <rect key="frame" x="10" y="876" width="408" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IY6-aQ-Fb7">
+                                        <rect key="frame" x="0.0" y="0.0" width="42.333333333333336" height="40"/>
+                                        <state key="normal" image="redSplat"/>
+                                        <connections>
+                                            <action selector="red:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sWD-rZ-L3v"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZg-iQ-ZCn">
+                                        <rect key="frame" x="52.333333333333329" y="0.0" width="42.333333333333329" height="40"/>
+                                        <state key="normal" image="greenSplat"/>
+                                        <connections>
+                                            <action selector="green:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1z1-6L-jaF"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DY2-7A-2Ir">
+                                        <rect key="frame" x="104.66666666666667" y="0.0" width="42.000000000000014" height="40"/>
+                                        <state key="normal" image="blueSplat"/>
+                                        <connections>
+                                            <action selector="blue:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1ak-gh-yMD"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rAH-Z7-OX1">
+                                        <rect key="frame" x="156.66666666666666" y="0.0" width="42.333333333333343" height="40"/>
+                                        <state key="normal" image="blackSplat"/>
+                                        <connections>
+                                            <action selector="black:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Fiz-1S-6oO"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uem-Mi-eOb">
+                                        <rect key="frame" x="209" y="0.0" width="42.333333333333343" height="40"/>
+                                        <state key="normal" image="erase"/>
+                                        <connections>
+                                            <action selector="eraser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tfG-Ij-9qy"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e4q-fT-bmh">
+                                        <rect key="frame" x="261.33333333333331" y="0.0" width="42.333333333333314" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Heavy" family="Avenir Next" pointSize="20"/>
+                                        <state key="normal" title="-">
+                                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="decrement:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ye9-jC-HTr"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.45000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="7G0-ta-vXo">
+                                        <rect key="frame" x="313.66666666666669" y="0.0" width="42" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Heavy" family="Avenir Next" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0L4-Ec-AP0">
+                                        <rect key="frame" x="365.66666666666669" y="0.0" width="42.333333333333314" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Heavy" family="Avenir Next" pointSize="20"/>
+                                        <state key="normal" title="+">
+                                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="incremment:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ipi-9g-pBs"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="kgd-6B-uoQ"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJ7-jt-2Sv">
+                                <rect key="frame" x="20" y="54" width="388" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="VIl-Kk-pTz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Heavy" family="Avenir Next" pointSize="27"/>
+                                <state key="normal" title="Reset"/>
+                                <connections>
+                                    <action selector="reset:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JoS-n4-TcS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -26,19 +109,33 @@
                             <constraint firstItem="Dcl-JY-7i6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="0Vs-Qy-6ub"/>
                             <constraint firstItem="Dcl-JY-7i6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="1sK-yP-2vN"/>
                             <constraint firstItem="Dcl-JY-7i6" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ACp-30-PTP"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0Df-tk-PI4" secondAttribute="trailing" constant="10" id="HQ5-uC-2gH"/>
                             <constraint firstAttribute="bottom" secondItem="Dcl-JY-7i6" secondAttribute="bottom" id="K0u-sO-bd8"/>
+                            <constraint firstItem="NJ7-jt-2Sv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="Obh-Zm-6qu"/>
+                            <constraint firstItem="0Df-tk-PI4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="Y1W-hI-nlN"/>
+                            <constraint firstAttribute="bottom" secondItem="0Df-tk-PI4" secondAttribute="bottom" constant="10" id="YQk-FD-Uej"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="NJ7-jt-2Sv" secondAttribute="trailing" constant="20" id="bHf-6i-7sN"/>
+                            <constraint firstItem="NJ7-jt-2Sv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="nA3-V5-TZe"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="brushSize" destination="7G0-ta-vXo" id="6EQ-jI-ZFM"/>
                         <outlet property="imageView" destination="Dcl-JY-7i6" id="g8z-X8-BO8"/>
+                        <outlet property="minusBtn" destination="e4q-fT-bmh" id="AHq-WU-rjm"/>
+                        <outlet property="plusBtn" destination="0L4-Ec-AP0" id="ZnH-Vf-No8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="30" y="71"/>
+            <point key="canvasLocation" x="28.037383177570092" y="70.626349892008648"/>
         </scene>
     </scenes>
     <resources>
+        <image name="blackSplat" width="200" height="200"/>
+        <image name="blueSplat" width="200" height="200"/>
+        <image name="erase" width="200" height="200"/>
+        <image name="greenSplat" width="200" height="200"/>
+        <image name="redSplat" width="200" height="200"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
