@@ -128,5 +128,26 @@ class ViewController: UIViewController {
         
         imageView.image = nil
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let settingVC = segue.destination as! SettingsViewController
+        settingVC.delegate = self
+        settingVC.brushWidth = brushWidth
+        settingVC.red = red
+        settingVC.blue = blue
+        settingVC.green = green
+
+        
+    }
 }
 
+extension ViewController: SettingsViewControllerDelegate{
+    func settingsViewControllerFinished(_ settingsViewController:SettingsViewController){
+        self.brushWidth = settingsViewController.brushWidth
+        self.red = settingsViewController.red
+        self.green = settingsViewController.green
+        self.blue = settingsViewController.blue
+
+        self.brushSizeFn()
+    }
+
+}
