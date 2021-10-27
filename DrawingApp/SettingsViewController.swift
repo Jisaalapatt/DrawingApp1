@@ -28,6 +28,8 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var blueLabel: UILabel!
     
     var brushWidth : CGFloat = 40.0
+    var oopacity : CGFloat = 1.0
+
     var red :CGFloat = 0.0
     var blue :CGFloat = 0.0
     var green :CGFloat = 0.0
@@ -45,11 +47,15 @@ class SettingsViewController: UIViewController {
         redSlider.value = Float(red*255)
         blueSlider.value = Float(blue*255)
         greenSlider.value = Float(green*255)
+
+        
         rLabel.text =  String(format: "%.0f/255", redSlider.value)
         blueLabel.text =  String(format: "%.0f/255", blueSlider.value)
         gLabel.text =  String(format: "%.0f/255", greenSlider.value)
-
         
+        oLabel.text = String(format: "Opacity: %.1f", oopacity)
+        opacity.value = Float(oopacity)
+
         // Do any additional setup after loading the view.
     }
     @IBAction func redChange(_ sender: Any) {
@@ -78,6 +84,9 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func OpacityChange(_ sender: Any) {
+        oopacity = CGFloat(opacity.value)
+        oLabel.text = String(format:"Opacity: %.1f",oopacity)
+        self.updatePrevview()
     }
     
     @IBAction func exit(_ sender: Any) {
@@ -90,7 +99,7 @@ class SettingsViewController: UIViewController {
         let context = UIGraphicsGetCurrentContext()
         context?.setLineCap(CGLineCap.round)
         context?.setLineWidth(brushWidth)
-        context?.setStrokeColor(red:red,green: green,blue: blue,alpha: 1)
+        context?.setStrokeColor(red:red,green: green,blue: blue,alpha: oopacity)
         context?.move(to: CGPoint(x: imageView.frame.width/2, y: imageView.frame.height/2))
         context?.addLine(to: CGPoint(x: imageView.frame.width/2, y: imageView.frame.height/2))
         context?.strokePath()

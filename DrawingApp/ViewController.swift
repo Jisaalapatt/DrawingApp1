@@ -9,6 +9,11 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var stack2: UIStackView!
+    
+    @IBOutlet weak var stack1: UIStackView!
+    @IBOutlet weak var reveal: UIButton!
+    @IBOutlet weak var secondImage: UIImageView!
     
     @IBOutlet weak var brushSize: UILabel!
     var swiped : Bool = false
@@ -19,13 +24,18 @@ class ViewController: UIViewController {
     var blue: CGFloat = 0.0
     
     var brushWidth : CGFloat  = 5.0
-    
+    var oopacity: CGFloat = 1.0
     @IBOutlet weak var minusBtn: UIButton!
     @IBOutlet weak var plusBtn: UIButton!
+    
+    var hideState = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        reveal.isHidden = true
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -48,23 +58,43 @@ class ViewController: UIViewController {
         
         if !swiped {
             drawLine(lastPoint, toPoint: lastPoint)
+            
+            
         }
+        UIGraphicsBeginImageContext(secondImage.frame.size)
+        
+        imageView.image?.draw(in: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height), blendMode: CGBlendMode.normal, alpha:1.0)
+        
+        
+        secondImage.image?.draw(in: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height), blendMode: CGBlendMode.normal, alpha:oopacity)
+        
+        imageView.image = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
+        
+        secondImage.image = nil
+        
     }
     
     func drawLine(_ fromPoint: CGPoint, toPoint: CGPoint ){
         
         UIGraphicsBeginImageContext(view.frame.size)
+        
         let context = UIGraphicsGetCurrentContext()
-        imageView.image?.draw(in: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
+        secondImage.image?.draw(in: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
+        
         context?.move(to: CGPoint(x: fromPoint.x, y: fromPoint.y))
         context?.addLine(to: CGPoint(x: fromPoint.x, y: fromPoint.y) )
         context?.setLineCap(CGLineCap.round)
         
         context?.setLineWidth(brushWidth)
-        context?.setStrokeColor(red:red, green:green, blue:blue, alpha:1)
+        context?.setStrokeColor(red:red, green:green, blue:blue, alpha:oopacity)
         context?.setBlendMode(CGBlendMode.normal)
         context?.strokePath()
-        imageView.image = UIGraphicsGetImageFromCurrentImageContext()
+        
+        secondImage.image = UIGraphicsGetImageFromCurrentImageContext()
+        secondImage.alpha = oopacity
+        
         UIGraphicsEndImageContext()
         
     }
@@ -132,12 +162,42 @@ class ViewController: UIViewController {
         let settingVC = segue.destination as! SettingsViewController
         settingVC.delegate = self
         settingVC.brushWidth = brushWidth
+        
         settingVC.red = red
         settingVC.blue = blue
         settingVC.green = green
+        
+        settingVC.oopacity = oopacity
 
         
     }
+    @IBAction func save(_ sender: Any) {
+        UIGraphicsBeginImageContext(imageView.bounds.size)
+        imageView.image?.draw(in: CGRect(x: 0, y: 0, width: imageView.frame.size.width, height: imageView.frame.size.height))
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
+        
+        let activvity = UIActivityViewController(activityItems : [image!],applicationActivities: nil)
+        present(activvity, animated: true, completion: nil)
+        
+        
+        
+        
+    }
+    
+    @IBAction func reveal(_ sender: Any) {
+        stack1.isHidden = false
+        stack2.isHidden = false
+        reveal.isHidden = true
+        reveal.alpha = 0.25
+    }
+    @IBAction func hide(_ sender: Any) {
+        stack1.isHidden = true
+        stack2.isHidden = true
+        reveal.isHidden = false
+    }
+    
 }
 
 extension ViewController: SettingsViewControllerDelegate{
@@ -146,7 +206,8 @@ extension ViewController: SettingsViewControllerDelegate{
         self.red = settingsViewController.red
         self.green = settingsViewController.green
         self.blue = settingsViewController.blue
-
+        
+        self.oopacity = settingsViewController.oopacity
         self.brushSizeFn()
     }
 
